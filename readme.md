@@ -25,29 +25,29 @@ To set this project up for development, you must install glfw (this project was 
 
 Once it's downloaded, add glfw to your includes in visual studio.
 
-You also will need to install glad and glm, and add them to you includes files as well.
+You also will need to install glad and glm, and add them to you includes files.
 
 
 # Controls:
 
 ## Movement:
-Mouse - look around
-WASD - move fowards, left, backwards, and right
-Up arrow - move vertically upwards without changing camera view direction
-Down arrow - move vertically downwards without changing camera view direction
+* Mouse - look around
+* WASD - move fowards, left, backwards, and right
+* Up arrow - move vertically upwards without changing camera view direction
+* Down arrow - move vertically downwards without changing camera view direction
 
 ## Block placement/deletion:
-Note - block placement/deletion is only enabled when the simulation is paused.
-Left click - place living cell
-Right click - delete (kill) living cell
-Both of these actions will update the neighbour counts on the next turn.
+* Note - block placement/deletion is only enabled when the simulation is paused.
+* Left click - place living cell
+* Right click - delete (kill) living cell
+* Both of these actions will update the neighbour counts on the next turn.
 
 ## Simulation controls:
-p - pauses the simulation
-u - unpauses the simulation
-m - opens the menu with option to change rule settings (pauses the simulation)
-c - closes the menu
-esc - closes the simulation
+* p - pauses the simulation
+* u - unpauses the simulation
+* m - opens the menu with option to change rule settings (pauses the simulation)
+* c - closes the menu
+* esc - closes the simulation
 
 
 # Menu terminology:
