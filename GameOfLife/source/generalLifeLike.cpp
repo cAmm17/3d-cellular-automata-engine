@@ -461,20 +461,24 @@ void generalLifeLike::resetAllDecayingCells(int oldCompareNum) {
 }
 
 void generalLifeLike::setBorn(std::vector<int> b) {
+	m.lock();
 	if (paused){
 		born = b;
 	}
+	m.unlock();
 }
 
 void generalLifeLike::setSurvives(std::vector<int> s) {
+	m.lock();
 	if (paused) {
 		survives = s;
 	}
+	m.unlock();
 }
 
 void generalLifeLike::setNeighbours(std::vector<glm::vec3> neighs) {
 	/* This sets which cells are considered "neighbours" to a cell based on the inputed array neigh of neighbours */
-
+	m.lock();
 	if (paused) {
 		for (glm::vec3 neighbour : neighs) {
 
@@ -485,6 +489,7 @@ void generalLifeLike::setNeighbours(std::vector<glm::vec3> neighs) {
 			if (numOfNeighbours > numOfTotalPossibleNeighbours) break;
 		}
 	}
+	m.unlock();
 }
 
 void generalLifeLike::setDecayStates(int decayStates) {
@@ -523,23 +528,13 @@ void generalLifeLike::setDecayStates(int decayStates) {
 		m.unlock();
 	}
 }
-
-void generalLifeLike::setUpGrid(int gridSz) {
-	
-}
-
-
+/*
 void generalLifeLike::resizeGrid(int newGridSize) {
 	if (paused) {
 		m.lock();
 		int tempFullGridSize;
-		if (is2d) {
-			//if the program is set to 2d then it only needs to save the x and y coordinates of neighbours blocks
-			tempFullGridSize = newGridSize;
-		}
-		else {
-			tempFullGridSize = newGridSize;
-		}
+		//if the program is set to 2d then it only needs to save the x and y coordinates of neighbours blocks
+		tempFullGridSize = newGridSize;
 
 		//creating the char arrays for the grids themselves
 		unsigned char* newGrid = new unsigned char[tempFullGridSize];
@@ -549,7 +544,6 @@ void generalLifeLike::resizeGrid(int newGridSize) {
 		gridPtr = swapGrid;
 
 		if (newGridSize >= gridSize) {
-			m.lock();
 			int x, y;
 			for (int z = 0; z < gridSize; z++)
 			{
@@ -579,7 +573,6 @@ void generalLifeLike::resizeGrid(int newGridSize) {
 
 			skip:;
 			//std::cout << sizeof(unsigned int) << " " << sizeof(unsigned char) << " \n";
-			m.unlock();
 
 			gridSize = newGridSize;
 			memset(grid, 0, fullGridSize);
@@ -590,7 +583,7 @@ void generalLifeLike::resizeGrid(int newGridSize) {
 		m.unlock();
 	}
 	
-}
+}*/
 
 //--------------------------------------------Mutators------------------------------------------------------------------------------------------------------------------------------------------------- 
 
@@ -667,7 +660,6 @@ void generalLifeLike::addToNeighbours(int x, int y, int z) {
 
 void generalLifeLike::removeFromNeighbours(int x, int y, int z) {
 	//This function searches the list of neighbours and removes the neighbour offset if it is found.
-
 	for (int ni = 0; ni < numOfNeighbours; ni++) {
 		if (neighbourOffsets[ni] == x && neighbourOffsets[ni + 1] == y && neighbourOffsets[ni + 2] == z) {
 			neighbourOffsets.erase(neighbourOffsets.begin() + ni);
@@ -711,7 +703,6 @@ void generalLifeLike::createMooreNeighbourhood() {
 			}
 		}
 	}
-
 }
 
 void generalLifeLike::createVonNeumanNeighbourhood() {
@@ -733,12 +724,11 @@ void generalLifeLike::createVonNeumanNeighbourhood() {
 		}
 	
 	}
-	
 }
 
 void generalLifeLike::generateRandomSeed(int numBlocksToGenerate) {
+	m.lock();
 	if (paused) {
-		m.lock();
 		int x, y, z;
 		for (int i = 0; i < numBlocksToGenerate; i++) {
 			x = rand() % gridSize;
@@ -747,14 +737,16 @@ void generalLifeLike::generateRandomSeed(int numBlocksToGenerate) {
 			if (!is2d) addNewCell(x, y, z, true);
 			else addNewCell(x, y, 0, true);
 		}
-		m.unlock();
+		
 	}
+	m.unlock();
 }
 
 //Resets exisiting grid to be empty
 void generalLifeLike::resetGrid() {
+	m.lock();
 	if (paused) {
-		m.lock();
+		
 		if (is2d) {
 			//if the program is set to 2d then it only needs to save the x and y coordinates of neighbours blocks
 			fullGridSize = gridSize * gridSize;
@@ -774,14 +766,16 @@ void generalLifeLike::resetGrid() {
 		memcpy(swapGrid, grid, fullGridSize);
 
 		setupGridOutlineModel();
-		m.unlock();
+		
 	}
+	m.unlock();
 }
 
 //Creates a new grid of requested size
 void generalLifeLike::resetGrid(int newGridSize, bool twoD) {
+	m.lock();
 	if (paused) {
-		m.lock();
+		
 		is2d = twoD;
 		gridSize = newGridSize;
 		if (is2d) {
@@ -807,6 +801,7 @@ void generalLifeLike::resetGrid(int newGridSize, bool twoD) {
 		memcpy(swapGrid, grid, fullGridSize);
 
 		setupGridOutlineModel();
-		m.unlock();
+		
 	}
+	m.unlock();
 }

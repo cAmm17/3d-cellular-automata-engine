@@ -5,16 +5,6 @@
 #include <windows.h>
 #include "Shader.h"
 
-/*
-add blocks to survive
-remove blocks from survive
-add blocks to born
-remove blocks from born
-add blocks to neigherbours
-remove blocks from neighbours
-reset num of decay states
-
-*/
 
 class generalLifeLike {
 private:

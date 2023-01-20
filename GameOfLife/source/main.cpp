@@ -190,7 +190,7 @@ int main()
 	std::thread updater(updateCurGrid);
 	float mousex, mousey, mousez;
 
-	gridMenu->setupGui(window, "#version 330 core", gameGrid);
+	gridMenu->setupGui(window, "#version 460 core", gameGrid);
 
 	//Render loop
 	while (!glfwWindowShouldClose(window))

@@ -17,6 +17,12 @@ This project currently uses the following frameworks and libraries:
 
 This project was built in visual studio on Windows 10, so installation and run instructions are geared towards this system.
 
+# Additional Credits:
+
+Both the [Shader loading functions](https://learnopengl.com/Getting-started/Shaders) and the [Camera functions](https://learnopengl.com/Getting-started/Camera) were heavily referenced from [Learn Open Gl's tutorials](https://learnopengl.com/) by Joey de Vries. Please check these tutorials out if you are interested in learning more about open gl.
+
+All other code aside from mentioned credits and specifications are mine.
+
 # Installation and run instructions
 
 To run this project, simply run the precomipled build. Note that the simulation starts paused, so you'll need to press the u key to start it.
@@ -58,9 +64,4 @@ You also will need to install glad and glm, and add them to you includes files.
 If a cell dies due to it's neighbour count, it will decend through the decay states by one each iteration until it reaches the last state and dies. This makes it so that the cell space is occupied (so neighbouring cells can't reproduce there) but the cell is not technically alive for a certain number of turns.
 To turn off this functionality, simply set the number of decay states to be 1, so that a cell immediately dies when it does not meet the survival condition instead of decaying.
 * [Von Neuman Neighbourhood](https://en.wikipedia.org/wiki/Von_Neumann_neighborhood): This is where cells directly adjecent to a face a considered neighbours. Cells diaganolly adjacent are not considered neighbours.
-![Von Nueman Neighbourhood in 2d image](https://en.wikipedia.org/wiki/Von_Neumann_neighborhood#/media/File:Von_Neumann_neighborhood.svg)
-(Image credit: Image credit to Rubber Duck, aquired through [wikipedia](https://en.wikipedia.org/wiki/Von_Neumann_neighborhood#/media/File:Von_Neumann_neighborhood.svg))
-
 * [Moore Neighbourhood](https://en.wikipedia.org/wiki/Moore_neighborhood): This is where cells that are directly adjecent to a face and cells that are diaganolly adjcent to a face are considered neighbours.
-![Moore Neighbourhood in 2d image]https://en.wikipedia.org/wiki/Moore_neighborhood#/media/File:Moore_neighborhood_with_cardinal_directions.svg)
-(Image credit: Image credit to MorningLemon, aquired through [wikipedia](https://en.wikipedia.org/wiki/Moore_neighborhood#/media/File:Moore_neighborhood_with_cardinal_directions.svg))
