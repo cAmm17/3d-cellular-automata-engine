@@ -25,7 +25,7 @@ int main()
 	//Initialize the grid manager for the game
 	int gridSz = 40;
 	bool twoD = false;
-	float update_rate = 0.5;
+
 	//Setting shader paths
 	const char* vertexShaderPath = "4.6.shader2.vs";
 	const char* fragmentShaderPath = "4.6.shader2.fs";
@@ -168,6 +168,8 @@ int main()
 	//Render loop
 	while (!glfwWindowShouldClose(window))
 	{
+		//Start time for frame limiter
+		
 		//Clear color and depth each render iteration so that the next iteration is drawn correctly.
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -214,6 +216,9 @@ int main()
 		//Swap drawing and displayed buffer
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+		// Limit the frames to stay at 60 so that the simulation doesn't run too fast
+		
 	}
 	gameGrid->update = false;
 	//if(updater.joinable())
@@ -302,8 +307,17 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
 void updateCurGrid() {
 	while (gameGrid->update) {
 		if (!gameGrid->paused) {
+			//start timer for limiter 
+			auto start = std::chrono::high_resolution_clock::now();
+
 			gameGrid->updateGrid();
-			Sleep(200);
+
+			// This clock limits the simulation to 4 updates per second at most so that it doesn't run too fast
+			auto end = std::chrono::high_resolution_clock::now();
+			int diff = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+			int frameLimiter = (int)((1000.0 / 4.0) - diff);
+
+			if (frameLimiter > 0) Sleep(frameLimiter);
 		}
 	}
 }
