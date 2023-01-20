@@ -23,7 +23,7 @@ static menu *gridMenu = new menu();
 int main()
 {
 	//Initialize the grid manager for the game
-	int gridSz = 50;
+	int gridSz = 40;
 	bool twoD = false;
 	float update_rate = 0.5;
 	//Setting shader paths
@@ -127,22 +127,6 @@ int main()
 
 	//test for grid, remove later
 	std::vector<glm::vec3> startBlock;
-	//startBlock.push_back(glm::vec3(10.0f, 10.0f, 10.0f));
-	//startBlock.push_back(glm::vec3(11.0f, 10.0f, 10.0f));
-	//startBlock.push_back(glm::vec3(10.0f, 11.0f, 10.0f));
-	//startBlock.push_back(glm::vec3(11.0f, 11.0f, 10.0f));
-	//startBlock.push_back(glm::vec3(10.0f, 10.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(11.0f, 10.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(10.0f, 11.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(11.0f, 11.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(11.0f, 11.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(11.0f, 12.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(12.0f, 11.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(12.0f, 12.0f, 11.0f));
-	//startBlock.push_back(glm::vec3(int(gridSz / 2), int(gridSz / 2), int(gridSz / 2) + 1));
-	//startBlock.push_back(glm::vec3(int(gridSz / 2), int(gridSz / 2) + 1, int(gridSz / 2) + 1));
-	//startBlock.push_back(glm::vec3(int(gridSz / 2) + 1, int(gridSz / 2), int(gridSz / 2) + 1));
-	//startBlock.push_back(glm::vec3(int(gridSz / 2) + 1, int(gridSz / 2) + 1, int(gridSz / 2) + 1));
 	int randnum;
 	for (int x = 0; x < 20; x++) {
 		for (int y = 0; y < 20; y++) {
@@ -151,7 +135,7 @@ int main()
 			}
 		}
 	}
-	//startBlock.push_back(glm::vec3(3.0f, 3.0f, 3.0f));
+
 	std::vector<glm::vec3> initNeigh;
 	
 	for (int x = -1; x < 2; x++) {
@@ -164,22 +148,11 @@ int main()
 			}
 		}
 	}
-	/*
-	initNeigh.push_back(glm::vec3(0, 0, 1));
-	initNeigh.push_back(glm::vec3(0, 1, 0));
-	initNeigh.push_back(glm::vec3(1, 0, 0));
-	initNeigh.push_back(glm::vec3(0, 0, -1));
-	initNeigh.push_back(glm::vec3(0, -1, 0));
-	initNeigh.push_back(glm::vec3(-1, 0, 0));
-	*/
 
 	std::vector<int> survives{ 4, 6, 8};
 	std::vector<int> born{5, 6};
 
 	gameGrid = new generalLifeLike(gridSz, startBlock, initNeigh, 4, survives, born, false);
-	
-
-	//gameGrid.initializeGrid(8, startBlock);
 
 	//Set projection matrix once since it is not going to be reset during gameplay
 	glm::mat4 projection;

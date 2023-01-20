@@ -65,3 +65,18 @@ If a cell dies due to it's neighbour count, it will decend through the decay sta
 To turn off this functionality, simply set the number of decay states to be 1, so that a cell immediately dies when it does not meet the survival condition instead of decaying.
 * [Von Neuman Neighbourhood](https://en.wikipedia.org/wiki/Von_Neumann_neighborhood): This is where cells directly adjecent to a face a considered neighbours. Cells diaganolly adjacent are not considered neighbours.
 * [Moore Neighbourhood](https://en.wikipedia.org/wiki/Moore_neighborhood): This is where cells that are directly adjecent to a face and cells that are diaganolly adjcent to a face are considered neighbours.
+
+# Screenshots:
+
+### Simulation:
+![Screenshot of Simulation](/Images/in_sim_1.png?raw=true "Screenshot of Simulation")
+
+![Screenshot of Simulation 2](/Images/in_sim_2.png?raw=true "Screenshot of Simulation 2")
+
+![Screenshot of Simulation - Random boxes](/Images/in_sim_3.png?raw=true "Screenshot of Simulation - Random Boxes")
+
+### Menu:
+
+![Menu Page 1](/Images/menu_1.png?raw=true "Menu Page 1")
+
+![Menu Page 2](/Images/menu_2.png?raw=true "Menu Page 2")
