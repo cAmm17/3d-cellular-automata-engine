@@ -32,16 +32,6 @@ private:
 
 	void setupGridOutlineModel();
 public:
-	//States is the number of states a cell can have. neighbours offsdets controls which blocks nearby will be checked as neighbours. The default would be 
-
-	
-	//Variables to store the outer limit of the checking functions. This will save time in the 
-	//grid update algorithm, as it will not need to check the entire grid.
-
-
-	//1 is currently updating grid, 0 is not updating
-
-	//This pauses the updating function. This is public so that the updating function ca
 	bool update;
 	bool paused;
 

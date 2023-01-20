@@ -302,16 +302,20 @@ void generalLifeLike::render(unsigned int &VAO, Shader &shaderProgram) {
 				if ((*gridPtr & compareNum) != 0) {
 					// grab the precomputed model matrix for this point and render
 					glm::mat4 model = modelMatrices[x + y * gridSize + z * gridSize * gridSize];
+
+					//Code for translating boxes on the fly - currently the program uses precomputation instead
 					//glm::mat4 model = glm::mat4(1.0f);
 					//translate the box to the right position. adding .5 since the boxes are centered at the passed in vector
 					//model = glm::translate(model, glm::vec3(x + 0.5, y + 0.5, z + 0.5));
+
 					//assign the model uniform
 					shaderProgram.setMat4("model", model);
 
 					//glm::vec3 boxColor = glm::vec3(neighbours * 0.1, neighbours * 0.15, 1);
-					//glm::vec3 boxColor = glm::vec3(x * mult_num, y * mult_num, z * mult_num);
+					float multNum = 1.0 / gridSize;
+					glm::vec3 boxColor = glm::vec3(x * multNum, y * multNum, z * multNum);
 
-					//shaderProgram.setVec3("inColor", boxColor);
+					shaderProgram.setVec3("inColor", boxColor);
 					//draw the box
 					glBindVertexArray(VAO);
 					glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -528,63 +532,6 @@ void generalLifeLike::setDecayStates(int decayStates) {
 		m.unlock();
 	}
 }
-/*
-void generalLifeLike::resizeGrid(int newGridSize) {
-	if (paused) {
-		m.lock();
-		int tempFullGridSize;
-		//if the program is set to 2d then it only needs to save the x and y coordinates of neighbours blocks
-		tempFullGridSize = newGridSize;
-
-		//creating the char arrays for the grids themselves
-		unsigned char* newGrid = new unsigned char[tempFullGridSize];
-		unsigned char* newTempGrid = new unsigned char[tempFullGridSize];
-
-		unsigned char* gridPtr;
-		gridPtr = swapGrid;
-
-		if (newGridSize >= gridSize) {
-			int x, y;
-			for (int z = 0; z < gridSize; z++)
-			{
-				y = 0;
-				do {
-					x = 0;
-					do {
-
-						while (*gridPtr == 0) {
-							gridPtr++;
-							if (++x >= gridSize) goto rowDone;
-						}
-
-
-
-						gridPtr++;
-						x++;
-
-					} while (x < gridSize);
-				rowDone:;
-					y++;
-				} while (y < gridSize);
-
-				if (is2d) goto skip;
-
-			}
-
-			skip:;
-			//std::cout << sizeof(unsigned int) << " " << sizeof(unsigned char) << " \n";
-
-			gridSize = newGridSize;
-			memset(grid, 0, fullGridSize);
-			gridCenter = int(gridSize / 2);
-
-			memcpy(swapGrid, grid, fullGridSize);
-		}
-		m.unlock();
-	}
-	
-}*/
-
 //--------------------------------------------Mutators------------------------------------------------------------------------------------------------------------------------------------------------- 
 
 void addBlocks(std::vector<int>& listToEdit, int numToAdd, int optionalEndRange) {
@@ -794,7 +741,7 @@ void generalLifeLike::resetGrid(int newGridSize, bool twoD) {
 		swapGrid = new unsigned char[fullGridSize];
 
 		modelMatrices = new glm::mat4[fullGridSize];
-		modelMatrices = calculateOffsets(gridSize, is2d);
+		modelMatrices = calculateOffsets(newGridSize, is2d);
 
 		memset(grid, 0, fullGridSize);
 		//copys data from the temp grid to the new grid
