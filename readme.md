@@ -25,7 +25,7 @@ All other code aside from mentioned credits and specifications are mine.
 
 # Installation and run instructions
 
-To run this project, simply run the precomipled build. Note that the simulation starts paused, so you'll need to press the u key to start it.
+To run this project, simply download and run the precomipled build under Releases (on the top right of the screen under about). Note that the simulation starts paused, so you'll need to press the u key to start it.
 
 To set this project up for development, you must install glfw (this project was built using version 3.3.8). You can either build from source or download the precompiled binaries. 
 
